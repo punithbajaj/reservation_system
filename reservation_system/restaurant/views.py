@@ -72,6 +72,8 @@ def reservating_table(request):
                 else:
                     return JsonResponse({'message' : f'already reserved in the duration {reserv.checkin_time} to {reserv.checkout_time}'})
 
+            checkin += timedelta(minutes=10)
+            checkout -= timedelta(minutes=10)
             Reservation.objects.create(table = table, people_count = people_count, checkin_time = checkin, checkout_time = checkout)
 
             return JsonResponse({'message' : 'sucessfully created the reservation'})
